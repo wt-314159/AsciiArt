@@ -18,6 +18,7 @@ ConsoleApp.LoopProgram(() =>
     var bmp = new Bitmap(path);
     var bmpGen = new BitmapAsciiGenerator();
     var art = bmpGen.GetAsciiArt(bmp, Console.WindowWidth, (int)Console.WindowHeight);
+
     Console.Write(art);
     Console.ReadLine();
 });
