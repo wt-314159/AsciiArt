@@ -2,19 +2,22 @@
 using AsciiArt;
 using System.Drawing;
 using System.Runtime.Versioning;
+using ConsoleHelpers;
 
-var path = Console.ReadLine();
-path = path?.Trim('"');
-if (path == null)
+ConsoleApp.LoopProgram(() =>
 {
-    path = Console.ReadLine();
-}
-var bmp = new Bitmap(path);
-//var bmpGen = new BitmapAsciiGenerator(
-//    "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'.",
-//    x => x.Grayscale());
-var bmpGen = new BitmapAsciiGenerator();
-var art = bmpGen.GetAsciiArt(bmp, Console.WindowWidth, (int)Console.WindowHeight);
-Console.Write(art);
-Console.SetCursorPosition(0, 0);
-Console.ReadLine();
+    Console.WriteLine("ASCII ART");
+    Console.WriteLine();
+    Console.WriteLine("Enter the path of an image to convert it to ASCII art:");
+
+    var path = ConsoleApp.GetInput(
+        x => !File.Exists(x?.Trim('"')),
+        "File path not valid, please try again.\n");
+    path = path?.Trim('"');
+
+    var bmp = new Bitmap(path);
+    var bmpGen = new BitmapAsciiGenerator();
+    var art = bmpGen.GetAsciiArt(bmp, Console.WindowWidth, (int)Console.WindowHeight);
+    Console.Write(art);
+    Console.ReadLine();
+});
