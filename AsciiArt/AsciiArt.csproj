@@ -11,4 +11,10 @@
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ConsoleHelpers">
+      <HintPath>..\..\ConsoleHelpers\ConsoleHelpers\bin\Release\net6.0\ConsoleHelpers.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

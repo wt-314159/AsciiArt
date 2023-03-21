@@ -9,6 +9,6 @@ namespace AsciiArt
     public interface IAsciiGenerator<T>
     {
         string GetAsciiArt(T obj);
-        string GetAsciiArt(T obj, int maxWidth);
+        string GetAsciiArt(T obj, int maxWidth, int maxHeight, bool negative);
     }
 }

@@ -15,11 +15,14 @@ namespace AsciiArt
             return (pixel.R + pixel.G + pixel.B) / 3;
         }
 
-        public static Bitmap ScaleToFit(this Bitmap bmp, double maxWidth)
+        public static Bitmap ScaleToFit(this Bitmap bmp, double maxWidth, double maxHeight)
         {
-            if (bmp.Width < maxWidth) { return bmp; }
+            if (bmp.Width < maxWidth && bmp.Height < maxHeight) { return bmp; }
 
-            var scalingFactor = maxWidth / bmp.Width;
+
+            var widthScalingFactor = maxWidth / bmp.Width;
+            var heightScalingFactor = maxHeight / bmp.Height;
+            var scalingFactor = widthScalingFactor < heightScalingFactor ? widthScalingFactor : heightScalingFactor;
             return new Bitmap(bmp, new Size((int)(bmp.Width * scalingFactor), (int)(bmp.Height * scalingFactor)));
         }
     }

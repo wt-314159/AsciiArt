@@ -23,11 +23,11 @@ namespace AsciiArt
         }
         
         public string GetAsciiArt(Bitmap bmp)
-            => GetAsciiArt(bmp, bmp.Width);
+            => GetAsciiArt(bmp, bmp.Width, bmp.Height);
 
-        public string GetAsciiArt(Bitmap bmp, int maxWidth)
+        public string GetAsciiArt(Bitmap bmp, int maxWidth, int maxHeight, bool negative = false)
         {
-            bmp = bmp.ScaleToFit(maxWidth / 2);
+            bmp = bmp.ScaleToFit(maxWidth / 2, maxHeight);
 
             var length = OrderedAsciiSet.Length - 1;
             var builder = new StringBuilder(bmp.Width * bmp.Height + bmp.Height * "\r\n".Length);
@@ -38,6 +38,7 @@ namespace AsciiArt
                     var pixel = bmp.GetPixel(j, i);
                     var pixelValue = GetPixelValue(pixel);
                     var index = pixelValue * length / 255;
+                    if (negative) index = length - index;
                     builder.Append(OrderedAsciiSet[index]);
                     builder.Append(OrderedAsciiSet[index]);
                 }
