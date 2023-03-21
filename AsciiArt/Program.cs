@@ -24,7 +24,26 @@ ConsoleApp.LoopProgram(() =>
     var bmp = new Bitmap(path);
     var bmpGen = new BitmapAsciiGenerator();
     var art = bmpGen.GetAsciiArt(bmp, Console.WindowWidth, Console.WindowHeight);
-
     Console.Write(art);
-    Console.ReadLine();
+
+    while (true)
+    {
+        var key = Console.ReadKey();
+        if (key.Key == ConsoleKey.Enter || key.Key == ConsoleKey.Escape)
+        {
+            break;
+        }
+        else if (key.KeyChar == '+')
+        {
+            var cropWidth = bmp.Width / 10;
+            var cropHeight = bmp.Height / 10;
+            var rectangle = new Rectangle(cropWidth, cropHeight, bmp.Width - cropWidth, bmp.Height - cropHeight);
+            var zoomed = bmp.Clone(rectangle, bmp.PixelFormat);
+            art = bmpGen.GetAsciiArt(zoomed, Console.WindowWidth, Console.WindowHeight);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.Write(art);
+        }
+    }
+
 });
