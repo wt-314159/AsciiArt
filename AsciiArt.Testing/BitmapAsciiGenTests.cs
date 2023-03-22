@@ -1,3 +1,4 @@
+using AsciiArt.AsciiGenerators;
 using System.Drawing;
 using System.Runtime.Versioning;
 
