@@ -20,6 +20,7 @@ internal class Program
         Console.Write(title);
         Console.WriteLine();
 
+        var settings = new MenuSettings(Console.WindowWidth / 2);
         var menu = new Menu("Main Menu",
             new MenuItem("Convert Image File", () => ConvertImage()),
             new MenuItem("Convert Video", () => Console.WriteLine("Functionality not implemented... yet.")),
@@ -28,7 +29,7 @@ internal class Program
 
         ConsoleApp.LoopProgram(() =>
         {
-            menu.Show();
+            menu.Show(settings);
         });
     }
 
