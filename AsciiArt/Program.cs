@@ -7,9 +7,11 @@ using AsciiArt.Properties;
 using AsciiArt.AsciiGenerators;
 using AsciiArt.AsciiCharacterProviders;
 using AsciiArt.Helpers;
+using System.Data.SqlTypes;
 
 internal class Program
 {
+    private const string _functionalityNotImplemented = "Functionality not implemented... yet.";
     private static void Main(string[] args)
     {
         var asciiArtTitle = Resources.AsciiArtScreenshot;
@@ -21,21 +23,17 @@ internal class Program
         Console.WriteLine();
 
         var settings = new MenuSettings(Console.WindowWidth / 2);
-        var menu = new Menu("Main Menu",
-            new MenuItem("Convert Image File", () => ConvertImage()),
-            new MenuItem("Convert Video", () => Console.WriteLine("Functionality not implemented... yet.")),
-            new MenuItem("Adjust Settings", () => Console.WriteLine("Functionality not implemented... yet."))
+        var menu = new Menu<bool>("Main Menu",
+            new MenuItem<bool>("Convert Image File", () => ConvertImage()),
+            new MenuItem<bool>("Convert Video", NotImplemented),
+            new MenuItem<bool>("Adjust Settings", NotImplemented)
             );
 
-        ConsoleApp.LoopProgram(() =>
-        {
-            menu.Show(settings);
-        });
+        ConsoleApp.LoopProgram(() => menu.Show(settings));
     }
 
-    public static void ConvertImage()
-    {
-        ConsoleApp.LoopProgram(() =>
+    public static bool ConvertImage()
+        => ConsoleApp.LoopProgram(() =>
         {
             Console.WriteLine();
             Console.WriteLine("Enter the path of an image to convert it to ASCII art:");
@@ -77,5 +75,10 @@ internal class Program
         },
         "To convert another image, press 'y', or to go back to the main menu, press 'Esc'",
         "");
+
+    private static bool NotImplemented()
+    {
+        Console.WriteLine(_functionalityNotImplemented);
+        return false;
     }
 }
