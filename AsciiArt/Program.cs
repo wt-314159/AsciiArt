@@ -42,7 +42,7 @@ internal class Program
                 x => File.Exists(x?.Trim('"')),
                 "File path not valid, please try again.\n");
             path = path?.Trim('"');
-
+            
             var asciiProvider = BasicCharacterProvider.HighContrast;
             var bmp = new Bitmap(path);
             var bmpGen = new BitmapAsciiGenerator();
@@ -73,8 +73,9 @@ internal class Program
                 }
             }
         },
-        "To convert another image, press 'y', or to go back to the main menu, press 'Esc'",
-        "");
+        "To convert another image, press 'y', to go back to the main menu, " +
+            "press any other key, or to exit press 'Esc'.",
+        string.Empty);
 
     private static bool NotImplemented()
     {
